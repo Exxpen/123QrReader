@@ -1,0 +1,86 @@
+<ion-modal-view>
+   <ion-header-bar>
+      <h1 class="title">Viewing: {{ showVolunteer.data.NAME }}</h1>
+   </ion-header-bar>
+   <ion-content>
+      <div class="card">
+         <div class="item item-wrap-text">
+            <p>
+               Name: {{ showVolunteer.data.NAME }}
+               <br>
+               ID: {{ showVolunteer.data.ID }}
+               <br>
+               Colour: {{ showVolunteer.data.COLOUR }}
+            </p>
+         </div>
+      </div>
+      <div class="card">
+         <div class="item">
+            <div style="padding-bottom: 20px;">
+               <button class="button button-medium button-positive" ng-click="signIn(showVolunteer.data.ID)" style="width: 50%">
+                  Sign In Now
+               </button>
+               <button class="button button-medium button-assertive" ng-click="signOut(showVolunteer.data.ID)" style="width: 50%">
+                  Sign Out Now
+               </button>
+            </div>
+            <label class="item item-input">
+               <span class="input-label">Date</span>
+               <input name="input" type="date" ng-model="calendar.date">
+            </label>
+            <label class="item item-input">
+               <span class="input-label">Time</span>
+               <input name="input" type="time" ng-model="calendar.date">
+            </label>
+            <button class="button button-medium button-positive" ng-click="signIn(showVolunteer.data.ID, calendar.date)" style="width: 50%">
+               Sign In Custom Time
+            </button>
+            <button class="button button-medium button-assertive" ng-click="signOut(showVolunteer.data.ID, calendar.date)" style="width: 50%">
+               Sign Out Custom Time
+            </button>
+         </div>
+      </div>
+      <div class="card">
+         <div class="item item-wrap-text">
+            <p>
+               Sign In:
+            </p>
+            <p ng-repeat="date in showVolunteer.data.IN track by $index">
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ toDate(date).toString() }}
+            </p>
+            <p>
+               Sign Out:
+            </p>
+            <p ng-repeat="date in showVolunteer.data.OUT track by $index">
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ toDate(date).toString() }}
+            </p>
+         </div>
+      </div>
+      <div class="card">
+         <div class="item item-divider">
+            Sign In:
+         </div>
+         <ion-list show-delete="shouldShowDelete">
+            <ion-item ng-repeat="date in showVolunteer.data.IN track by $index" class="item-remove-animate item-icon-right">
+               {{ toDate(date).toString() }}
+               <ion-option-button class="button-assertive" ng-click="">
+                  Delete
+               </ion-option-button>
+            </ion-item>
+         </ion-list>
+      </div>
+      <div class="card">
+         <div class="item item-divider">
+            Sign Out:
+         </div>
+         <ion-list>
+            <ion-item ng-repeat="date in showVolunteer.data.OUT track by $index" class="item-remove-animate item-icon-right">
+               {{ toDate(date).toString() }}
+               <ion-option-button class="button-assertive" ng-click="">
+                  Delete
+               </ion-option-button>
+            </ion-item>
+         </ion-list>
+      </div>
+   </ion-content>
+</ion-modal-view>
