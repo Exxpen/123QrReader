@@ -32,7 +32,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    };
 })
 
-.controller('ChatsCtrl', function($scope, Database, $ionicModal, $cordovaDatePicker) {
+.controller('VolunteersCtrl', function($scope, Database, $ionicModal, $cordovaDatePicker) {
    $scope.database = Database.all();
    $scope.searchVal = {
       data: ""
