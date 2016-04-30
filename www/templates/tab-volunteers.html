@@ -8,9 +8,6 @@
          <input type="search" placeholder="Search" ng-model="searchVal.data" ng-change="updateDatabaseView()">
       </label>
       <ion-list>
-         <ion-item>
-            The Value is: {{ searchVal.data }}
-         </ion-item>
          <ion-item ng-repeat="volunteer in database" ng-click="showVolunteer.open(volunteer)">
             <h2>{{volunteer.NAME}} - {{volunteer.ID}}</h2>
          </ion-item>
