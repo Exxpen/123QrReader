@@ -37,6 +37,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    $scope.searchVal = {
       data: ""
    };
+   $scope.hours = {
+      data: 0
+   };
+   $scope.addHours = function(dbID) {
+      Database.addHours(dbID, $scope.hours.data);
+      $scope.hours.data = 0;
+   };
    $scope.updateDatabaseView = function() {
       var tempDatabase = Database.all();
       $scope.database = [];
@@ -86,20 +93,31 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       $scope.database = Database.all();
    };
    $scope.toDate = function(date) {
+      if (date === 0) {
+         return "False";
+      }
       return new Date(date);
    };
    $scope.signIn = function(ID, date) {
-      if (arguments.length === 1) {
-         Database.signIn(ID);
-      } else {
-         Database.signIn(ID, date);
+      try {
+         if (arguments.length === 1) {
+            Database.signIn(ID);
+         } else {
+            Database.signIn(ID, date);
+         }
+      } catch (e) {
+         alert(e);
       }
    };
    $scope.signOut = function(ID, date) {
-      if (arguments.length === 1) {
-         Database.signOut(ID);
-      } else {
-         Database.signOut(ID, date);
+      try {
+         if (arguments.length === 1) {
+            Database.signOut(ID);
+         } else {
+            Database.signOut(ID, date);
+         }
+      } catch (e) {
+         alert(e);
       }
    };
 })
