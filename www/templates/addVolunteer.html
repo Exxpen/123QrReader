@@ -1,0 +1,45 @@
+<ion-modal-view>
+   <ion-header-bar>
+      <h1 class="title">Adding New Volunteer</h1>
+   </ion-header-bar>
+   <ion-content>
+      <div class="card">
+         <div class="item item-divider">
+            Description
+         </div>
+         <ion-list>
+            <label class="item item-input">
+               <span class="input-label">Name</span>
+               <input type="text" ng-model="addVolunteer.data.NAME">
+            </label>
+            <label class="item item-input">
+               <span class="input-label">Colour</span>
+               <input type="text" ng-model="addVolunteer.data.COLOUR">
+            </label>
+            <li class="item item-toggle">
+               Handed in Waiver Form
+               <label class="toggle toggle-positive">
+                  <input type="checkbox" ng-model="addVolunteer.data.WAIVER">
+                  <div class="track">
+                     <div class="handle"></div>
+                  </div>
+               </label>
+            </li>
+            <li class="item item-toggle">
+               Received T-Shirt
+               <label class="toggle toggle-positive">
+                  <input type="checkbox" ng-model="addVolunteer.data.SHIRT">
+                  <div class="track">
+                     <div class="handle"></div>
+                  </div>
+               </label>
+            </li>
+            <ion-item>
+               <button class="button button-block button-positive" ng-click="addVolunteer.add()">
+                  Add New Volunteer
+               </button>
+            </ion-item>
+         </ion-list>
+      </div>
+   </ion-content>
+</ion-modal-view>
