@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
-.controller('DashCtrl', function($scope, $cordovaBarcodeScanner, Database) {
+.controller('DashCtrl', function($scope, $cordovaBarcodeScanner, Database, $ionicModal) {
    $scope.signInScan = function() {
       try {
          $cordovaBarcodeScanner.scan().then(function(imageData) {
@@ -30,6 +30,36 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          alert(e);
       }
    };
+
+   $ionicModal.fromTemplateUrl('templates/addVolunteer.html', {
+      scope: $scope
+   }).then(function(modal) {
+      // showVolunteer is an object to manipulate the modal
+      $scope.addVolunteer = {
+         modal: modal,
+         data: {},
+         close: function() {
+            $scope.addVolunteer.modal.hide();
+         },
+         open: function(volunteer) {
+            $scope.addVolunteer.data = {
+               "NAME":"",
+               "ID": Math.random() * (99999 - 999) + 999,
+               "COLOUR":"",
+               "DATE":"Sep. 25, 2009",
+               "IN":0,
+               "HOURS":0,
+               "SHIRT":false,
+               "WAIVER":false
+            };
+            $scope.addVolunteer.modal.show();
+         },
+         add: function() {
+            Database.addVolunteer($scope.addVolunteer.data);
+            $scope.addVolunteer.close();
+         }
+      };
+   });
 })
 
 .controller('VolunteersCtrl', function($scope, Database, $ionicModal, $cordovaDatePicker) {
@@ -55,10 +85,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          }
       }
    };
-   $scope.calendar = {
-      date: new Date(),
-   };
-   $scope.calendar.date.setMilliseconds(100);
    $ionicModal.fromTemplateUrl('templates/showVolunteer.html', {
       scope: $scope
    }).then(function(modal) {
@@ -70,10 +96,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
             $scope.showVolunteer.modal.hide();
          },
          open: function(volunteer) {
-            $scope.calendar = {
-               date: new Date()
-            };
-            $scope.calendar.date.setMilliseconds(100);
             $scope.showVolunteer.data = volunteer;
             $scope.showVolunteer.modal.show();
          }
@@ -82,14 +104,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
    $scope.reset = function() {
       Database.reset();
-      $scope.database = Database.all();
-   };
-   $scope.deleteSignIn = function(ID, date) {
-      Database.removeSignIn(ID, date);
-      $scope.database = Database.all();
-   };
-   $scope.deleteSignOut = function(ID, date) {
-      Database.removeSignOut(ID, date);
       $scope.database = Database.all();
    };
    $scope.toDate = function(date) {
@@ -119,6 +133,14 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       } catch (e) {
          alert(e);
       }
+   };
+   $scope.updateShirt = function(ID) {
+      Database.updateShirt(ID);
+      $scope.database = Database.all();
+   };
+   $scope.updateWaiver = function(ID) {
+      Database.updateWaiver(ID);
+      $scope.database = Database.all();
    };
 })
 

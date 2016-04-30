@@ -20,7 +20,7 @@
             <li class="item item-toggle">
                Handed in Waiver Form
                <label class="toggle toggle-positive">
-                  <input type="checkbox" ng-model="isChecked">
+                  <input type="checkbox" ng-model="showVolunteer.data.WAIVER" ng-click="updateWaiver(showVolunteer.data.ID)">
                   <div class="track">
                      <div class="handle"></div>
                   </div>
@@ -29,7 +29,7 @@
             <li class="item item-toggle">
                Received T-Shirt
                <label class="toggle toggle-positive">
-                  <input type="checkbox" ng-model="isChecked">
+                  <input type="checkbox" ng-model="showVolunteer.data.SHIRT" ng-click="updateWaiver(showVolunteer.data.ID)">
                   <div class="track">
                      <div class="handle"></div>
                   </div>
