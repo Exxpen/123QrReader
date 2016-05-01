@@ -48,11 +48,11 @@ angular.module('starter.services', [])
                if (db[i].IN === 0) {
                   db[i].IN = (new Date()).getTime();
                   window.localStorage.database = JSON.stringify(db);
+                  return;
                } else {
                   throw "Volunteer is already signed in";
                }
             }
-            return;
          }
          throw "ID not found";
       },
@@ -66,9 +66,9 @@ angular.module('starter.services', [])
                   calculateHours(db[i]);
                   db[i].IN = 0;
                   window.localStorage.database = JSON.stringify(db);
+                  return;
                }
             }
-            return;
          }
          throw "ID not found";
       },
@@ -77,8 +77,8 @@ angular.module('starter.services', [])
             if (db[i].ID === parseInt(dbID)) {
                db[i].HOURS += hours;
                window.localStorage.database = JSON.stringify(db);
+               return;
             }
-            return;
          }
          throw "ID not found";
       },
@@ -89,20 +89,28 @@ angular.module('starter.services', [])
       updateShirt: function(dbID) {
          for (var i = 0; i < db.length; i++) {
             if (db[i].ID === parseInt(dbID)) {
-               db[i].SHIRT = !db[i].SHIRT;
+               if (db[i].SHIRT === "true") {
+                  db[i].SHIRT = false;
+               } else if (db[i].SHIRT === "false") {
+                  db[i].SHIRT = true;
+               }
                window.localStorage.database = JSON.stringify(db);
+               return;
             }
-            return;
          }
          throw "ID not found";
       },
       updateWaiver: function(dbID) {
          for (var i = 0; i < db.length; i++) {
             if (db[i].ID === parseInt(dbID)) {
-               db[i].WAIVER = !db[i].WAIVER;
+               if (db[i].WAIVER === "true") {
+                  db[i].WAIVER = false;
+               } else if (db[i].WAIVER === "false") {
+                  db[i].WAIVER = true;
+               }
                window.localStorage.database = JSON.stringify(db);
+               return;
             }
-            return;
          }
          throw "ID not found";
       }
