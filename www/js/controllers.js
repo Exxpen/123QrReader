@@ -15,7 +15,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          alert(e);
       }
    };
-
    $scope.signOutScan = function() {
       try {
          $cordovaBarcodeScanner.scan().then(function(imageData) {
@@ -30,7 +29,11 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          alert(e);
       }
    };
-
+   var currID = 999;
+   $scope.getNewID = function() {
+      currID++;
+      return currID;
+   };
    $ionicModal.fromTemplateUrl('templates/addVolunteer.html', {
       scope: $scope
    }).then(function(modal) {
@@ -44,7 +47,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          open: function(volunteer) {
             $scope.addVolunteer.data = {
                "NAME":"",
-               "ID": Math.floor(Math.random() * (99999 - 999) + 999),
+               "ID": $scope.getNewID(),
                "COLOUR":"",
                "DATE":"Sep. 25, 2009",
                "IN":0,
