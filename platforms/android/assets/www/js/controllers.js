@@ -15,7 +15,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          alert(e);
       }
    };
-
    $scope.signOutScan = function() {
       try {
          $cordovaBarcodeScanner.scan().then(function(imageData) {
@@ -30,7 +29,11 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          alert(e);
       }
    };
-
+   var currID = 999;
+   $scope.getNewID = function() {
+      currID++;
+      return currID;
+   };
    $ionicModal.fromTemplateUrl('templates/addVolunteer.html', {
       scope: $scope
    }).then(function(modal) {
@@ -44,7 +47,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          open: function(volunteer) {
             $scope.addVolunteer.data = {
                "NAME":"",
-               "ID": Math.random() * (99999 - 999) + 999,
+               "ID": $scope.getNewID(),
                "COLOUR":"",
                "DATE":"Sep. 25, 2009",
                "IN":0,
@@ -78,9 +81,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       var tempDatabase = Database.all();
       $scope.database = [];
       for (var i = 0; i < tempDatabase.length; i++) {
-         // console.log(tempDatabase[i].NAME.toLowerCase().includes($scope.searchVal.data.toLowerCase()));
          if (tempDatabase[i].NAME.toLowerCase().includes($scope.searchVal.data.toLowerCase())) {
-            // console.log("Found a match: " + tempDatabase[i].NAME + ", search val : " + $scope.searchVal.data);
             $scope.database.push(Database.all()[i]);
          }
       }
@@ -105,6 +106,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    $scope.reset = function() {
       Database.reset();
       $scope.database = Database.all();
+   };
+   $scope.debug = function() {
+      console.log($scope.database);
    };
    $scope.toDate = function(date) {
       if (date === 0) {
@@ -135,10 +139,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       }
    };
    $scope.updateShirt = function(ID) {
+      console.log("updateShirt");
       Database.updateShirt(ID);
       $scope.database = Database.all();
    };
    $scope.updateWaiver = function(ID) {
+      console.log("updateWaiver");
       Database.updateWaiver(ID);
       $scope.database = Database.all();
    };

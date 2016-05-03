@@ -18,18 +18,18 @@
                Colour: {{ showVolunteer.data.COLOUR }}
             </ion-item>
             <li class="item item-toggle">
-               Handed in Waiver Form
+               Received T-Shirt
                <label class="toggle toggle-positive">
-                  <input type="checkbox" ng-model="showVolunteer.data.WAIVER" ng-click="updateWaiver(showVolunteer.data.ID)">
+                  <input type="checkbox" ng-model="showVolunteer.data.SHIRT" ng-click="updateShirt(showVolunteer.data.ID)">
                   <div class="track">
                      <div class="handle"></div>
                   </div>
                </label>
             </li>
             <li class="item item-toggle">
-               Received T-Shirt
+               Handed in Waiver Form
                <label class="toggle toggle-positive">
-                  <input type="checkbox" ng-model="showVolunteer.data.SHIRT" ng-click="updateWaiver(showVolunteer.data.ID)">
+                  <input type="checkbox" ng-model="showVolunteer.data.WAIVER" ng-click="updateWaiver(showVolunteer.data.ID)">
                   <div class="track">
                      <div class="handle"></div>
                   </div>
@@ -58,7 +58,7 @@
                <input type="number" ng-model="hours.data">
             </label>
             <button class="button button-small" ng-click="addHours(showVolunteer.data.ID)">
-               Submit
+               Submit wat
             </button>
          </div>
       </div>
