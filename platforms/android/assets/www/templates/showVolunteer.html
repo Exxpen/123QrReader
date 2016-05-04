@@ -39,7 +39,7 @@
                Currently Signed In: {{ toDate(showVolunteer.data.IN) | date:'EEEE, MMMM d, h:mma' }}
             </ion-item>
             <ion-item>
-               Hours: {{ showVolunteer.data.HOURS | number:2 }}
+               Hours: {{ toTime.hour(showVolunteer.data.HOURS) }}:{{ toTime.minute(showVolunteer.data.HOURS) }}
             </ion-item>
          </ion-list>
       </div>
@@ -58,7 +58,7 @@
                <input type="number" ng-model="hours.data">
             </label>
             <button class="button button-small" ng-click="addHours(showVolunteer.data.ID)">
-               Submit wat
+               Submit
             </button>
          </div>
       </div>

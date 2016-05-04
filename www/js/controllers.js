@@ -29,9 +29,15 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          alert(e);
       }
    };
-   var currID = 999;
+   var currID = 500;
+   if (window.localStorage.currID) {
+      currID = JSON.parse(window.localStorage.currID);
+   } else {
+      window.localStorage.currID = JSON.stringify(currID);
+   }
    $scope.getNewID = function() {
       currID++;
+      window.localStorage.currID = JSON.stringify(currID);
       return currID;
    };
    $ionicModal.fromTemplateUrl('templates/addVolunteer.html', {
@@ -80,11 +86,23 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    $scope.updateDatabaseView = function() {
       var tempDatabase = Database.all();
       $scope.database = [];
-      for (var i = 0; i < tempDatabase.length; i++) {
-         if (tempDatabase[i].NAME.toLowerCase().includes($scope.searchVal.data.toLowerCase())) {
-            $scope.database.push(Database.all()[i]);
+      tempDatabase.forEach(function(element, index, array) {
+         if ($scope.searchVal.data.length < element.NAME.length) {
+            var search = $scope.searchVal.data.toLowerCase();
+            var name = element.NAME.toLowerCase();
+            for (var i = 0; i < (name.length - search.length); i++) {
+               if (name.substr(i, search.length) === search) {
+                  $scope.database.push(element);
+                  break;
+               }
+            }
          }
-      }
+      });
+      // for (var i = 0; i < tempDatabase.length; i++) {
+      //    if (tempDatabase[i].NAME.toLowerCase().includes($scope.searchVal.data.toLowerCase())) {
+      //       $scope.database.push(Database.all()[i]);
+      //    }
+      // }
    };
    $ionicModal.fromTemplateUrl('templates/showVolunteer.html', {
       scope: $scope
@@ -116,6 +134,21 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       }
       return new Date(date);
    };
+   $scope.toTime = {
+      hour: function(time) {
+         return Math.floor(time);
+      },
+      minute: function(time) {
+         var val = Math.floor((time - Math.floor(time))*60);
+         if (val === 0) {
+            return "00";
+         } else if (val < 10) {
+            return "0" + val.toString();
+         } else {
+            return val;
+         }
+      }
+   };
    $scope.signIn = function(ID, date) {
       try {
          if (arguments.length === 1) {
@@ -139,12 +172,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       }
    };
    $scope.updateShirt = function(ID) {
-      console.log("updateShirt");
       Database.updateShirt(ID);
       $scope.database = Database.all();
    };
    $scope.updateWaiver = function(ID) {
-      console.log("updateWaiver");
       Database.updateWaiver(ID);
       $scope.database = Database.all();
    };

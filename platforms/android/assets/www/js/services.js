@@ -2,10 +2,10 @@ angular.module('starter.services', [])
 
 .factory('Database', function() {
    var db = [
-      {"NAME":"Alan","ID":123,"COLOUR":"blue","DATE":"Sep. 25, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-      {"NAME":"Shan","ID":234,"COLOUR":"red","DATE":"Sep. 27, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-      {"NAME":"John","ID":345,"COLOUR":"orange","DATE":"Sep. 29, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-      {"NAME":"Minna","ID":456,"COLOUR":"teal","DATE":"Sep. 30, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
+      {"NAME":"Alan","ID":1,"COLOUR":"blue","DATE":"Sep. 25, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
+      {"NAME":"Shan","ID":2,"COLOUR":"red","DATE":"Sep. 27, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
+      {"NAME":"John","ID":3,"COLOUR":"orange","DATE":"Sep. 29, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
+      {"NAME":"Minna","ID":4,"COLOUR":"teal","DATE":"Sep. 30, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
    ];
    // Load db from storage, otherwise save db to storage
    if (window.localStorage.database) {
@@ -22,10 +22,10 @@ angular.module('starter.services', [])
    return {
       reset: function() {
          db = [
-            {"NAME":"Alan","ID":123,"COLOUR":"blue","DATE":"Sep. 25, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"NAME":"Shan","ID":234,"COLOUR":"red","DATE":"Sep. 27, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"NAME":"John","ID":345,"COLOUR":"orange","DATE":"Sep. 29, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"NAME":"Minna","ID":456,"COLOUR":"teal","DATE":"Sep. 30, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
+            {"NAME":"Alan","ID":1,"COLOUR":"blue","DATE":"Sep. 25, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
+            {"NAME":"Shan","ID":2,"COLOUR":"red","DATE":"Sep. 27, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
+            {"NAME":"John","ID":3,"COLOUR":"orange","DATE":"Sep. 29, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
+            {"NAME":"Minna","ID":4,"COLOUR":"teal","DATE":"Sep. 30, 2009","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
          ];
          window.localStorage.database = JSON.stringify(db);
       },
