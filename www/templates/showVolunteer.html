@@ -1,21 +1,52 @@
 <ion-modal-view>
    <ion-header-bar>
-      <h1 class="title">Viewing: {{ showVolunteer.data.NAME }}</h1>
+      <h1 class="title">Viewing: {{ showVolunteer.data.FNAME + " " + showVolunteer.data.LNAME}}</h1>
    </ion-header-bar>
    <ion-content>
+      <div class="card">
+         <div class="item">
+            <button class="button button-medium button-positive" ng-click="signIn(showVolunteer.data.ID)" style="width: 50%">
+               Sign In
+            </button>
+            <button class="button button-medium button-assertive" ng-click="signOut(showVolunteer.data.ID)" style="width: 50%">
+               Sign Out
+            </button>
+         </div>
+      </div>
       <div class="card">
          <div class="item item-divider">
             Description
          </div>
          <ion-list>
-            <ion-item>
-               Name: {{ showVolunteer.data.NAME }}
+            <ion-item style="padding: 10px 16px;">
+               First Name: {{ showVolunteer.data.FNAME }}
             </ion-item>
-            <ion-item>
+            <ion-item style="padding: 10px 16px;">
+               Last Name: {{ showVolunteer.data.LNAME }}
+            </ion-item>
+            <ion-item style="padding: 10px 16px;">
+               Phone Number: {{ showVolunteer.data.PHONE }}
+            </ion-item>
+            <ion-item style="padding: 10px 16px;">
+               Age: {{ showVolunteer.data.AGE }}
+            </ion-item>
+            <ion-item style="padding: 10px 16px;">
+               E-mail: {{ showVolunteer.data.EMAIL }}
+            </ion-item>
+            <ion-item style="padding: 10px 16px;">
+               School: {{ showVolunteer.data.SCHOOL }}
+            </ion-item>
+            <ion-item style="padding: 10px 16px;">
+               Address: {{ showVolunteer.data.ADDRESS }}, {{ showVolunteer.data.POSTALCODE }}, {{ showVolunteer.data.CITY }}
+            </ion-item>
+            <ion-item style="padding: 10px 16px;">
+               Emergency Contact: {{ showVolunteer.data.EMERGCONTACT }}, {{ showVolunteer.data.EMERGRELATION }}
+            </ion-item>
+            <ion-item style="padding: 10px 16px;">
+               Emergency Phone Number: {{ showVolunteer.data.EMERGNUMBER }}
+            </ion-item>
+            <ion-item style="padding: 10px 16px;">
                ID: {{ showVolunteer.data.ID }}
-            </ion-item>
-            <ion-item>
-               Colour: {{ showVolunteer.data.COLOUR }}
             </ion-item>
             <li class="item item-toggle">
                Received T-Shirt
@@ -35,30 +66,27 @@
                   </div>
                </label>
             </li>
-            <ion-item>
+            <ion-item style="padding: 10px 16px;">
                Currently Signed In: {{ toDate(showVolunteer.data.IN) | date:'EEEE, MMMM d, h:mma' }}
             </ion-item>
-            <ion-item>
+            <ion-item style="padding: 10px 16px;">
                Hours: {{ toTime.hour(showVolunteer.data.HOURS) }}:{{ toTime.minute(showVolunteer.data.HOURS) }}
             </ion-item>
+            <div class="item item-input-inset">
+               <label class="item-input-wrapper">
+                  <span class="input-label">Add Number of Hours</span>
+                  <input type="number" ng-model="hours.data">
+               </label>
+               <button class="button button-small" ng-click="addHours(showVolunteer.data.ID)">
+                  Submit
+               </button>
+            </div>
          </ion-list>
       </div>
-      <div class="card">
+      <div class="card" style="margin-top: 50px;">
          <div class="item">
-            <button class="button button-medium button-positive" ng-click="signIn(showVolunteer.data.ID)" style="width: 50%">
-               Sign In
-            </button>
-            <button class="button button-medium button-assertive" ng-click="signOut(showVolunteer.data.ID)" style="width: 50%">
-               Sign Out
-            </button>
-         </div>
-         <div class="item item-input-inset">
-            <label class="item-input-wrapper">
-               <span class="input-label">Add Number of Hours</span>
-               <input type="number" ng-model="hours.data">
-            </label>
-            <button class="button button-small" ng-click="addHours(showVolunteer.data.ID)">
-               Submit
+            <button class="button button-block button-assertive" ng-click="deleteVolunteer(showVolunteer.data.ID)">
+               Delete Volunteer
             </button>
          </div>
       </div>

@@ -1,20 +1,20 @@
 <ion-view view-title="Volunteer List">
    <ion-content>
-      <ion-item>
+      <!-- <ion-item>
          <button class="button button-block button-assertive" ng-click="reset()">
             Reset Database
          </button>
          <button class="button button-block button-assertive" ng-click="debug()">
             Debug
          </button>
-      </ion-item>
+      </ion-item> -->
       <label class="item item-input">
          <i class="icon ion-search placeholder-icon"></i>
          <input type="search" placeholder="Search" ng-model="searchVal.data" ng-change="updateDatabaseView()">
       </label>
       <ion-list>
-         <ion-item ng-repeat="volunteer in database | orderBy:'NAME' track by $index" ng-click="showVolunteer.open(volunteer)">
-            <h2>{{volunteer.NAME}} - {{volunteer.ID}}</h2>
+         <ion-item ng-repeat="volunteer in database | orderBy:['LNAME','FNAME'] track by $index" ng-click="showVolunteer.open(volunteer)">
+            <h2>{{volunteer.LNAME}}, {{volunteer.FNAME}}</h2>
          </ion-item>
       </ion-list>
    </ion-content>
