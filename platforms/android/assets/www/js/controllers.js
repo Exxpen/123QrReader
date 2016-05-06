@@ -52,14 +52,18 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          },
          open: function(volunteer) {
             $scope.addVolunteer.data = {
-               "NAME":"",
                "ID": $scope.getNewID(),
-               "COLOUR":"",
-               "DATE":"Sep. 25, 2009",
-               "IN":0,
-               "HOURS":0,
-               "SHIRT":false,
-               "WAIVER":false
+               "FNAME":"",
+               "LNAME":"",
+               "PHONE":"",
+               "AGE":"",
+               "SCHOOL":"",
+               "ADDRESS":"",
+               "POSTALCODE":"",
+               "EMERGCONTACT":"",
+               "EMERGNUMBER":"",
+               "IN":0,"HOURS":0,
+               "SHIRT":false,"WAIVER":false
             };
             $scope.addVolunteer.modal.show();
          },
@@ -87,9 +91,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       var tempDatabase = Database.all();
       $scope.database = [];
       tempDatabase.forEach(function(element, index, array) {
-         if ($scope.searchVal.data.length < element.NAME.length) {
+         if ($scope.searchVal.data.length < (element.LNAME.length + element.FNAME.length + 2)) {
             var search = $scope.searchVal.data.toLowerCase();
-            var name = element.NAME.toLowerCase();
+            var name = element.FNAME.toLowerCase() + " " + element.LNAME.toLowerCase();
             for (var i = 0; i < (name.length - search.length); i++) {
                if (name.substr(i, search.length) === search) {
                   $scope.database.push(element);
@@ -98,11 +102,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
             }
          }
       });
-      // for (var i = 0; i < tempDatabase.length; i++) {
-      //    if (tempDatabase[i].NAME.toLowerCase().includes($scope.searchVal.data.toLowerCase())) {
-      //       $scope.database.push(Database.all()[i]);
-      //    }
-      // }
    };
    $ionicModal.fromTemplateUrl('templates/showVolunteer.html', {
       scope: $scope
@@ -178,6 +177,14 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    $scope.updateWaiver = function(ID) {
       Database.updateWaiver(ID);
       $scope.database = Database.all();
+   };
+   $scope.deleteVolunteer = function(ID) {
+      var sign = prompt("Type \"continue\" to confirm deletion of volunteer");
+      if (sign && sign.toLowerCase() === "continue") {
+         Database.removeVolunteer(ID);
+         $scope.updateDatabaseView();
+         $scope.showVolunteer.close();
+      }
    };
 })
 
