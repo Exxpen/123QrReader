@@ -48,7 +48,7 @@
             <ion-item style="padding: 10px 16px;">
                ID: {{ showVolunteer.data.ID }}
             </ion-item>
-            <li class="item item-toggle">
+            <ion-radio class="item item-toggle">
                Received T-Shirt
                <label class="toggle toggle-positive">
                   <input type="checkbox" ng-model="showVolunteer.data.SHIRT" ng-click="updateShirt(showVolunteer.data.ID)">
@@ -56,7 +56,7 @@
                      <div class="handle"></div>
                   </div>
                </label>
-            </li>
+            </ion-radio>
             <li class="item item-toggle">
                Handed in Waiver Form
                <label class="toggle toggle-positive">
@@ -67,7 +67,7 @@
                </label>
             </li>
             <ion-item style="padding: 10px 16px;">
-               Currently Signed In: {{ toDate(showVolunteer.data.IN) | date:'EEEE, MMMM d, h:mma' }}
+               Currently Signed In: {{ toTime.date(showVolunteer.data.IN) | date:'EEEE, MMMM d, h:mma' }}
             </ion-item>
             <ion-item style="padding: 10px 16px;">
                Hours: {{ toTime.hour(showVolunteer.data.HOURS) }}:{{ toTime.minute(showVolunteer.data.HOURS) }}
@@ -75,9 +75,9 @@
             <div class="item item-input-inset">
                <label class="item-input-wrapper">
                   <span class="input-label">Add Number of Hours</span>
-                  <input type="number" ng-model="hours.data">
+                  <input type="number" ng-model="hoursData">
                </label>
-               <button class="button button-small" ng-click="addHours(showVolunteer.data.ID)">
+               <button class="button button-small" ng-click="addHours(showVolunteer.data.ID, hoursData); hoursData = 0;">
                   Submit
                </button>
             </div>

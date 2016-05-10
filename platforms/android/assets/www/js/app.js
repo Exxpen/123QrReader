@@ -23,8 +23,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
    });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
-
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+   $ionicConfigProvider.tabs.position("bottom");
+   $ionicConfigProvider.navBar.alignTitle('center');
+   $ionicConfigProvider.form.checkbox('square');
+   $ionicConfigProvider.form.toggle('small');
    // Ionic uses AngularUI Router which uses the concept of states
    // Learn more here: https://github.com/angular-ui/ui-router
    // Set up the various states which the app can be in.
@@ -35,7 +38,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
    .state('tab', {
       url: '/tab',
       abstract: true,
-      templateUrl: 'templates/tabs.html'
+      templateUrl: 'templates/tabs.html',
+      controller: 'RootCtrl'
    })
 
    // Each tab has its own nav history stack:
@@ -45,7 +49,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       views: {
          'tab-dash': {
             templateUrl: 'templates/tab-dash.html',
-            controller: 'DashCtrl'
          }
       }
    })
@@ -53,19 +56,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
    .state('tab.volunteers', {
       url: '/volunteers',
       views: {
-         'tab-chats': {
+         'tab-volunteers': {
             templateUrl: 'templates/tab-volunteers.html',
-            controller: 'VolunteersCtrl'
          }
       }
    })
 
-   .state('tab.account', {
-      url: '/account',
+   .state('tab.history', {
+      url: '/history',
       views: {
-         'tab-account': {
-            templateUrl: 'templates/tab-account.html',
-            controller: 'AccountCtrl'
+         'tab-history': {
+            templateUrl: 'templates/tab-history.html',
          }
       }
    });

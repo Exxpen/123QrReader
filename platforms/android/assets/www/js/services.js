@@ -1,7 +1,7 @@
 angular.module('starter.services', [])
 
 .factory('Database', function() {
-   var db = [
+   var defaultDB = [
       {"ID":1,"FNAME":"Alexander","LNAME":"Yeung","PHONE":4161234567,"AGE":20,"EMAIL":"test@123domain.com","SCHOOL":"Lawrence Park CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
       "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
       {"ID":2,"FNAME":"Jen","LNAME":"Chan","PHONE":4161234567,"AGE":15,"EMAIL":"test@123domain.com","SCHOOL":"Agincourt CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
@@ -46,9 +46,10 @@ angular.module('starter.services', [])
       "POSTALCODE":"M2N7A2","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
       {"ID":21,"FNAME":"Meghan","LNAME":"Fox","PHONE":4161234567,"AGE":16,"EMAIL":"test@123domain.com","SCHOOL":"Mary Ward CSS","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
       "POSTALCODE":"M2N7A2","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-      {"ID":22,"FNAME":"Nicolas","Cage":"123","PHONE":4161234567,"AGE":16,"EMAIL":"test@123domain.com","SCHOOL":"Mary Ward CSS","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
+      {"ID":22,"FNAME":"Nicolas","LNAME":"Cage","PHONE":4161234567,"AGE":16,"EMAIL":"test@123domain.com","SCHOOL":"Mary Ward CSS","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
       "POSTALCODE":"M2N7A2","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false}
    ];
+   var db = defaultDB;
    // Load db from storage, otherwise save db to storage
    if (window.localStorage.database) {
       db = JSON.parse(window.localStorage.database);
@@ -63,54 +64,7 @@ angular.module('starter.services', [])
    };
    return {
       reset: function() {
-         db = [
-            {"ID":1,"FNAME":"Alexander","LNAME":"Yeung","PHONE":4161234567,"AGE":20,"EMAIL":"test@123domain.com","SCHOOL":"Lawrence Park CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":2,"FNAME":"Jen","LNAME":"Chan","PHONE":4161234567,"AGE":15,"EMAIL":"test@123domain.com","SCHOOL":"Agincourt CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":3,"FNAME":"Mark","LNAME":"Choi","PHONE":4161234567,"AGE":17,"EMAIL":"test@123domain.com","SCHOOL":"Pierre Elliot Trudeau HS","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":4,"FNAME":"David","LNAME":"Lin","PHONE":4161234567,"AGE":18,"EMAIL":"test@123domain.com","SCHOOL":"Agincourt CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":5,"FNAME":"Matthew","LNAME":"Smith","PHONE":4161234567,"AGE":15,"EMAIL":"test@123domain.com","SCHOOL":"Agincourt CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":5,"FNAME":"Mark","LNAME":"Smith","PHONE":4161234567,"AGE":15,"EMAIL":"test@123domain.com","SCHOOL":"Agincourt CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":6,"FNAME":"Dan","LNAME":"Chan","PHONE":4161234567,"AGE":15,"EMAIL":"test@123domain.com","SCHOOL":"Agincourt CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":7,"FNAME":"Avery","LNAME":"Wu","PHONE":4161234567,"AGE":15,"EMAIL":"test@123domain.com","SCHOOL":"Agincourt CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":8,"FNAME":"Tom","LNAME":"Cruise","PHONE":4161234567,"AGE":15,"EMAIL":"test@123domain.com","SCHOOL":"Agincourt CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":9,"FNAME":"Matt","LNAME":"Damon","PHONE":4161234567,"AGE":15,"EMAIL":"test@123domain.com","SCHOOL":"Agincourt CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":10,"FNAME":"Ryan","LNAME":"Reynolds","PHONE":4161234567,"AGE":15,"EMAIL":"test@123domain.com","SCHOOL":"Agincourt CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":11,"FNAME":"Jason","LNAME":"Statham","PHONE":4161234567,"AGE":15,"EMAIL":"test@123domain.com","SCHOOL":"Agincourt CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":12,"FNAME":"Arnold","LNAME":"Schwarzenegger","PHONE":4161234567,"AGE":15,"EMAIL":"test@123domain.com","SCHOOL":"Agincourt CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":13,"FNAME":"Sylvester","LNAME":"Stallone","PHONE":4161234567,"AGE":15,"EMAIL":"test@123domain.com","SCHOOL":"Agincourt CI","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"A12B3C","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":14,"FNAME":"Barrack","LNAME":"Obama","PHONE":4161234567,"AGE":16,"EMAIL":"test@123domain.com","SCHOOL":"Mary Ward CSS","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"M2N7A2","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":15,"FNAME":"Kobe","LNAME":"Bryant","PHONE":4161234567,"AGE":16,"EMAIL":"test@123domain.com","SCHOOL":"Mary Ward CSS","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"M2N7A2","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":16,"FNAME":"Jessica","LNAME":"Alba","PHONE":4161234567,"AGE":16,"EMAIL":"test@123domain.com","SCHOOL":"Mary Ward CSS","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"M2N7A2","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":17,"FNAME":"Brad","LNAME":"Pitt","PHONE":4161234567,"AGE":16,"EMAIL":"test@123domain.com","SCHOOL":"Mary Ward CSS","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"M2N7A2","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":18,"FNAME":"James","LNAME":"Dean","PHONE":4161234567,"AGE":16,"EMAIL":"test@123domain.com","SCHOOL":"Mary Ward CSS","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"M2N7A2","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":19,"FNAME":"Daniel","LNAME":"Radcliffe","PHONE":4161234567,"AGE":16,"EMAIL":"test@123domain.com","SCHOOL":"Mary Ward CSS","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"M2N7A2","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":20,"FNAME":"Keira","LNAME":"Knightley","PHONE":4161234567,"AGE":16,"EMAIL":"test@123domain.com","SCHOOL":"Mary Ward CSS","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"M2N7A2","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":21,"FNAME":"Meghan","LNAME":"Fox","PHONE":4161234567,"AGE":16,"EMAIL":"test@123domain.com","SCHOOL":"Mary Ward CSS","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"M2N7A2","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false},
-            {"ID":22,"FNAME":"Nicolas","Cage":"123","PHONE":4161234567,"AGE":16,"EMAIL":"test@123domain.com","SCHOOL":"Mary Ward CSS","ADDRESS":"123 Warden Ave.","CITY":"Scarborough",
-            "POSTALCODE":"M2N7A2","EMERGCONTACT":"John Doe","EMERGNUMBER":4161234567,"EMERGRELATION":"Father","IN":0,"HOURS":0,"SHIRT":false,"WAIVER":false}
-         ];
+         db = defaultDB;
          window.localStorage.database = JSON.stringify(db);
       },
       all: function() {
@@ -126,7 +80,7 @@ angular.module('starter.services', [])
          return null;
       },
       // Returns whether or not signIn was successful
-      signIn: function(dbID, date) {
+      signIn: function(dbID) {
          for (var i = 0; i < db.length; i++) {
             if (db[i].ID === parseInt(dbID)) {
                if (db[i].IN === 0) {
@@ -141,7 +95,7 @@ angular.module('starter.services', [])
          throw "ID not found";
       },
       // Returns whether or not signOut was successful
-      signOut: function(dbID, date) {
+      signOut: function(dbID) {
          for (var i = 0; i < db.length; i++) {
             if (db[i].ID === parseInt(dbID)) {
                if (db[i].IN === 0) {
@@ -209,4 +163,28 @@ angular.module('starter.services', [])
          throw "ID not found";
       }
    };
+})
+
+.service('showVolunteerModal', function($ionicModal, $rootScope) {
+   return function($scope) {
+      $scope = $scope || $rootScope.$new();
+
+      return $ionicModal.fromTemplateUrl('templates/showVolunteer.html', {
+         scope: $scope
+      }).then(function(modal) {
+         // showVolunteer is an object to manipulate the modal
+         $scope.showVolunteer = {
+            modal: modal,
+            data: {},
+            close: function() {
+               $scope.showVolunteer.modal.hide();
+            },
+            open: function(volunteer) {
+               $scope.showVolunteer.data = volunteer;
+               $scope.showVolunteer.modal.show();
+            }
+         };
+      });
+   };
+
 });
