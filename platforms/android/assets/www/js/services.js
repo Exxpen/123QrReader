@@ -163,28 +163,4 @@ angular.module('starter.services', [])
          throw "ID not found";
       }
    };
-})
-
-.service('showVolunteerModal', function($ionicModal, $rootScope) {
-   return function($scope) {
-      $scope = $scope || $rootScope.$new();
-
-      return $ionicModal.fromTemplateUrl('templates/showVolunteer.html', {
-         scope: $scope
-      }).then(function(modal) {
-         // showVolunteer is an object to manipulate the modal
-         $scope.showVolunteer = {
-            modal: modal,
-            data: {},
-            close: function() {
-               $scope.showVolunteer.modal.hide();
-            },
-            open: function(volunteer) {
-               $scope.showVolunteer.data = volunteer;
-               $scope.showVolunteer.modal.show();
-            }
-         };
-      });
-   };
-
 });
