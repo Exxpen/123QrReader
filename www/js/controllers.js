@@ -5,18 +5,28 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    $scope.updateDatabaseView = function(searchVal) {
       var tempDatabase = Database.all();
       $scope.database = [];
-      tempDatabase.forEach(function(element, index, array) {
-         if (searchVal.length < (element.LNAME.length + element.FNAME.length + 2)) {
-            var search = searchVal.toLowerCase();
-            var name = element.FNAME.toLowerCase() + " " + element.LNAME.toLowerCase();
-            for (var i = 0; i < (name.length - search.length); i++) {
-               if (name.substr(i, search.length) === search) {
-                  $scope.database.push(element);
-                  break;
+      if (searchVal.toLowerCase() == "(s)") {
+         // Look for volunteers signed in
+         tempDatabase.forEach(function(element, index, array) {
+            if (element.IN !== 0) {
+               $scope.database.push(element);
+            }
+         });
+      } else {
+         // Filter volunteers by searchVal
+         tempDatabase.forEach(function(element, index, array) {
+            if (searchVal.length < (element.LNAME.length + element.FNAME.length + 2)) {
+               var search = searchVal.toLowerCase();
+               var name = element.FNAME.toLowerCase() + " " + element.LNAME.toLowerCase();
+               for (var i = 0; i < (name.length - search.length); i++) {
+                  if (name.substr(i, search.length) === search) {
+                     $scope.database.push(element);
+                     break;
+                  }
                }
             }
-         }
-      });
+         });
+      }
    };
 
    $scope.history = [];
@@ -155,6 +165,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          });
       } catch (e) {
          alert(e);
+      }
+   };
+   $scope.isSignedIn = function(volunteer) {
+      if (volunteer.IN !== 0) {
+         return "(S)";
+      } else {
+         return "";
       }
    };
 
