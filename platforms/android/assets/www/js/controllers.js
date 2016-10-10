@@ -15,15 +15,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       } else {
          // Filter volunteers by searchVal
          tempDatabase.forEach(function(element, index, array) {
-            if (searchVal.length < (element.LNAME.length + element.FNAME.length + 2)) {
-               var search = searchVal.toLowerCase();
-               var name = element.FNAME.toLowerCase() + " " + element.LNAME.toLowerCase();
-               for (var i = 0; i < (name.length - search.length); i++) {
-                  if (name.substr(i, search.length) === search) {
-                     $scope.database.push(element);
-                     break;
-                  }
-               }
+            if (searchVal.length <= element.NAME.length &&
+               element.NAME.toLowerCase().indexOf(searchVal.toLowerCase()) > -1 ) {
+               $scope.database.push(element);
             }
          });
       }
@@ -48,14 +42,14 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          },
          open: function(volunteer) {
             $scope.addVolunteer.data = {
-               "ID": $scope.getNewID(), "FNAME":"", "LNAME":"", "PHONE":"", "AGE":"", "SCHOOL":"", "ADDRESS":"",
-               "POSTALCODE":"", "EMERGCONTACT":"", "EMERGNUMBER":"", "IN":0,"HOURS":0, "SHIRT":false,"WAIVER":false
+               "ID": $scope.getNewID(), "NAME":"", "PHONE":"", "AGE":"", "SCHOOL":"", "EMERGCONTACT":"",
+               "EMERGNUMBER":"", "IN":0,"HOURS":0, "SHIRT":false,"WAIVER":false
             };
             $scope.addVolunteer.modal.show();
          },
          add: function() {
             Database.addVolunteer($scope.addVolunteer.data);
-            $scope.history.push($scope.getName($scope.addVolunteer.data) + ": added new volunteer");
+            $scope.history.push($scope.addVolunteer.data.NAME + ": added new volunteer");
             window.localStorage.history = JSON.stringify($scope.history);
             $scope.addVolunteer.close();
          }
@@ -98,38 +92,35 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          return val;
       }
    };
-   $scope.getName = function(volunteer) {
-      return volunteer.FNAME + " " + volunteer.LNAME;
-   };
    $scope.signIn = function(ID) {
       Database.signIn(ID);
-      $scope.history.push($scope.getName(Database.get(ID)) + ": signed in");
+      $scope.history.push(Database.get(ID).NAME + ": signed in");
       window.localStorage.history = JSON.stringify($scope.history);
    };
    $scope.signOut = function(ID) {
       Database.signOut(ID);
-      $scope.history.push($scope.getName(Database.get(ID)) + ": signed out");
+      $scope.history.push(Database.get(ID).NAME + ": signed out");
       window.localStorage.history = JSON.stringify($scope.history);
    };
    $scope.addHours = function(ID, hours) {
       Database.addHours(ID, hours);
-      $scope.history.push($scope.getName(Database.get(ID)) + ": added " + hours + " hours");
+      $scope.history.push(Database.get(ID).NAME + ": added " + hours + " hours");
       window.localStorage.history = JSON.stringify($scope.history);
    };
    $scope.updateShirt = function(ID) {
       Database.updateShirt(ID);
-      $scope.history.push($scope.getName(Database.get(ID)) + ": changed shirt value to " + Database.get(ID).SHIRT);
+      $scope.history.push(Database.get(ID).NAME + ": changed shirt value to " + Database.get(ID).SHIRT);
       window.localStorage.history = JSON.stringify($scope.history);
    };
    $scope.updateWaiver = function(ID) {
       Database.updateWaiver(ID);
-      $scope.history.push($scope.getName(Database.get(ID)) + ": changed waiver value to " + Database.get(ID).WAIVER);
+      $scope.history.push(Database.get(ID).NAME + ": changed waiver value to " + Database.get(ID).WAIVER);
       window.localStorage.history = JSON.stringify($scope.history);
    };
    $scope.deleteVolunteer = function(ID) {
       var sign = prompt("Type \"continue\" to confirm deletion of volunteer");
       if (sign && sign.toLowerCase() === "continue") {
-         $scope.history.push($scope.getName(Database.get(ID)) + ": deleted from database");
+         $scope.history.push(Database.get(ID).NAME + ": deleted from database");
          window.localStorage.history = JSON.stringify($scope.history);
          Database.removeVolunteer(ID);
          $scope.showVolunteer.close();
@@ -138,12 +129,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    $scope.signInScan = function() {
       try {
          $cordovaBarcodeScanner.scan().then(function(imageData) {
-            var volunteer = Database.get(imageData.text.substr(imageData.text.indexOf('ID=') + 3, 3));
+            var volunteer = Database.getFromEmail(imageData.text);
             Database.signIn(volunteer.ID);
             $scope.showVolunteer.open(volunteer);
-            $scope.history.push($scope.getName(volunteer) + ": signed in");
+            $scope.history.push(volunteer.NAME + ": signed in");
             window.localStorage.history = JSON.stringify($scope.history);
-            alert("Signed in: " + $scope.getName(volunteer));
+            alert("Signed in: " + volunteer.NAME);
          }, function(error) {
             console.log("An error happened -> " + error);
          });
@@ -154,12 +145,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    $scope.signOutScan = function() {
       try {
          $cordovaBarcodeScanner.scan().then(function(imageData) {
-            var volunteer = Database.get(imageData.text.substr(imageData.text.indexOf('ID=') + 3, 3));
+            var volunteer = Database.getFromEmail(imageData.text);
             Database.signOut(volunteer.ID);
             $scope.showVolunteer.open(volunteer);
-            $scope.history.push($scope.getName(volunteer) + ": signed out");
+            $scope.history.push(volunteer.NAME + ": signed out");
             window.localStorage.history = JSON.stringify($scope.history);
-            alert("Signed out: " + $scope.getName(volunteer));
+            alert("Signed out: " + volunteer.NAME);
          }, function(error) {
             console.log("An error happened -> " + error);
          });

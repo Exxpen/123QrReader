@@ -13,8 +13,8 @@
          <input type="search" placeholder="Search" ng-model="searchVal" ng-change="updateDatabaseView(searchVal)">
       </label>
       <ion-list>
-         <ion-item ng-repeat="volunteer in database | orderBy:['LNAME','FNAME'] track by $index" ng-click="showVolunteer.open(volunteer)">
-            <h2>{{volunteer.LNAME}}, {{volunteer.FNAME}} {{isSignedIn(volunteer)}}</h2>
+         <ion-item ng-repeat="volunteer in database | orderBy:['NAME'] track by $index" ng-click="showVolunteer.open(volunteer)">
+            <h2>{{volunteer.NAME}} {{isSignedIn(volunteer)}}</h2>
          </ion-item>
       </ion-list>
    </ion-content>
